@@ -3,7 +3,7 @@ import random
 import time
 from langdetect import detect
 
-# Supported languages with enhanced detection
+
 SUPPORTED_LANGUAGES = {
     'en': 'English',
     'de': 'German',
@@ -13,7 +13,7 @@ SUPPORTED_LANGUAGES = {
     'zh': 'Chinese'
 }
 
-# Comprehensive multilingual knowledge base
+
 RULES = {
     "greeting": {
         "patterns": {
@@ -636,7 +636,6 @@ RULES = {
 
 def detect_language(text):
     try:
-        # Check for unique script markers first
         if any('\u0900' <= char <= '\u097F' for char in text):  # Hindi
             return 'hi'
         if any(char in ['ے', 'ی', 'ہ', 'ھ', 'ں'] for char in text):  # Urdu
@@ -648,7 +647,7 @@ def detect_language(text):
         if any(char in 'äöüß' for char in text.lower()):  # German
             return 'de'
         
-        # Fall back to langdetect
+        
         lang = detect(text)
         return lang if lang in SUPPORTED_LANGUAGES else 'en'
     except:
@@ -657,7 +656,7 @@ def detect_language(text):
 def detect_intent(user_input, lang='en'):
     user_input = user_input.lower().strip()
     
-    # Check all patterns for the detected language
+
     for intent, data in RULES.items():
         if intent == "default":
             continue
@@ -692,18 +691,18 @@ def main():
     st.markdown("Ask about our services in English, Arabic, Chinese, Urdu, Hindi, or German")
     
 
-    # Initialize chat history
+   
     if "messages" not in st.session_state:
         st.session_state.messages = [
             {"role": "assistant", "content": "Hello! How can I help you today?", "lang": "en"}
         ]
 
-    # Display chat messages
+   
     for message in st.session_state.messages:
         with st.chat_message(message["role"]):
             st.markdown(message["content"])
 
-    # Chat input
+    
     if prompt := st.chat_input("Type your message..."):
         # Detect language and add user message
         detected_lang = detect_language(prompt)
@@ -712,18 +711,18 @@ def main():
         with st.chat_message("user"):
             st.markdown(prompt)
 
-        # Generate response
+        
         with st.spinner("Thinking..."):
             time.sleep(0.3)
             intent = detect_intent(prompt, detected_lang)
             response = get_response(intent, detected_lang)
 
-        # Add assistant response
+    
         st.session_state.messages.append({"role": "assistant", "content": response, "lang": detected_lang})
         with st.chat_message("assistant"):
             st.markdown(response)
 
-        # Rerun to update the chat
+       
         st.rerun()
 
 if __name__ == "__main__":
