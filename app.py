@@ -636,15 +636,15 @@ RULES = {
 
 def detect_language(text):
     try:
-        if any('\u0900' <= char <= '\u097F' for char in text):  # Hindi
+        if any('\u0900' <= char <= '\u097F' for char in text):  
             return 'hi'
-        if any(char in ['ے', 'ی', 'ہ', 'ھ', 'ں'] for char in text):  # Urdu
+        if any(char in ['ے', 'ی', 'ہ', 'ھ', 'ں'] for char in text):  
             return 'ur'
-        if any('\u0600' <= char <= '\u06FF' for char in text):  # Arabic
+        if any('\u0600' <= char <= '\u06FF' for char in text):  
             return 'ar'
-        if any('\u4e00' <= char <= '\u9fff' for char in text):  # Chinese
+        if any('\u4e00' <= char <= '\u9fff' for char in text):  
             return 'zh'
-        if any(char in 'äöüß' for char in text.lower()):  # German
+        if any(char in 'äöüß' for char in text.lower()):  
             return 'de'
         
         
@@ -678,7 +678,7 @@ def get_response(intent, lang='en'):
         return RULES["default"]["responses"].get(lang, ["I don't understand"])
 
 def main():
-    st.set_page_config(page_title="Multilingual Chatbot", layout="centered")
+    st.set_page_config(page_title="AI Vista Solutions", layout="centered")
     st.markdown(
     """
     <h2 style='text-align: center; color: #4B8BBE; font-family: "Georgia", serif;'>
