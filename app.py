@@ -689,10 +689,7 @@ def main():
     unsafe_allow_html=True
         )
     st.title("AI Vista Solutions Assistant")
-    st.markdown(
-    '<p style="color:black; font-size:0.875rem;">Ask about our services in English, German, Urdu, Chinese, Hindi, or Arabic</p>',
-    unsafe_allow_html=True
-)
+    st.markdown("Ask about our services in English, Arabic, Chinese, Urdu, Hindi, or German")
     
 
     # Initialize chat history
